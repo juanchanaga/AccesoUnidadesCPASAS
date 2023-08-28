@@ -126,6 +126,17 @@ def buscar_letra_disponible():
     letras_disponibles = [letra for letra in reversed(string.ascii_uppercase) if letra not in letras_usadas]
     return letras_disponibles[0] if letras_disponibles else None
 
+# Función para manejar el cierre de la ventana
+def cerrar_ventana():
+    if messagebox.askokcancel("Cerrar", "¿Estás seguro de que deseas cerrar el programa?"):
+        eliminar_unidades_mapeadas()
+        ventana.destroy()
+
+# Función para eliminar unidades mapeadas al finalizar
+def eliminar_unidades_mapeadas():
+    for unidad in unidades_mapeadas:
+        subprocess.run(f'net use {unidad}: /delete', shell=True, capture_output=True)
+
 def ejecutar_programa():
     # Solicitar al usuario ingresar su nombre de usuario
     usuario = entry_usuario.get()
@@ -165,6 +176,7 @@ def ejecutar_programa():
                                "No se encontraron unidades de red mapeadas para el usuario y contraseña proporcionados.")
         cerrar_ventana()
 
+#Creación interfaz de usuario
 # Crear ventana
 ventana = tk.Tk()
 ventana.title("Mapeo de Unidades de Red")
@@ -189,17 +201,6 @@ entry_contrasena.pack()
 # Botón para ejecutar el programa
 boton_ejecutar = tk.Button(ventana, text="Ejecutar", command=ejecutar_programa)
 boton_ejecutar.pack(pady=10)
-
-# Función para manejar el cierre de la ventana
-def cerrar_ventana():
-    if messagebox.askokcancel("Cerrar", "¿Estás seguro de que deseas cerrar el programa?"):
-        eliminar_unidades_mapeadas()
-        ventana.destroy()
-
-# Función para eliminar unidades mapeadas al finalizar
-def eliminar_unidades_mapeadas():
-    for unidad in unidades_mapeadas:
-        subprocess.run(f'net use {unidad}: /delete', shell=True, capture_output=True)
 
 ventana.protocol("WM_DELETE_WINDOW", cerrar_ventana)
 
