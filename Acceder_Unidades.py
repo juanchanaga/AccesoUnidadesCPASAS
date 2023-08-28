@@ -136,6 +136,11 @@ def ejecutar_programa():
     entry_contrasena.config(state="disabled")
     boton_ejecutar.config(state="disabled")
 
+    # Antes de mapear nuevas unidades, desconecta las conexiones previas al mismo servidor
+    for unidad, datos in unidades_red.items():
+        servidor = datos["ruta"].split("\\")[2]  # Obtén el nombre del servidor
+        subprocess.run(f'net use /delete /y \\\\{servidor}', shell=True, capture_output=True, text=True)
+
     # Conectar a unidades del usuario
     for unidad, datos in unidades_red.items():
         ruta = datos["ruta"]
