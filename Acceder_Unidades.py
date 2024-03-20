@@ -140,28 +140,28 @@ def buscar_letra_disponible():
 
 
 # Función para cerrar los procesos específicos
-def cerrar_procesos():
-    # Obtener una lista de todos los procesos en ejecución
-    for proc in psutil.process_iter():
-        try:
-            pinfo = proc.as_dict(attrs=['pid', 'name'])
-            if any(programa.lower() in pinfo['name'].lower() for programa in ['winword', 'excel', 'powerpnt', 'acrobat', 'explorer']):
-                proc.terminate()  # Terminar el proceso de manera amigable
-                print(f"Proceso {pinfo['name']} terminado.")
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
+# def cerrar_procesos():
+#     # Obtener una lista de todos los procesos en ejecución
+#     for proc in psutil.process_iter():
+#         try:
+#             pinfo = proc.as_dict(attrs=['pid', 'name'])
+#             if any(programa.lower() in pinfo['name'].lower() for programa in ['winword', 'excel', 'powerpnt', 'acrobat', 'explorer']):
+#                 proc.terminate()  # Terminar el proceso de manera amigable
+#                 print(f"Proceso {pinfo['name']} terminado.")
+#         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+#             pass
 
 
 # Función para manejar el cierre de la ventana
 def cerrar_ventana():
     if messagebox.askokcancel("Cerrar", "¿Estás seguro de que deseas cerrar el programa?"):
-        cerrar_procesos()
+        # cerrar_procesos()
         eliminar_unidades_mapeadas()
         ventana.destroy()
 
 def cerrar_sesion():
     if messagebox.askokcancel("Cerrar Sesión", "¿Estás seguro de que deseas cerrar la sesión?"):
-        cerrar_procesos()
+        # cerrar_procesos()
         eliminar_unidades_mapeadas()
         entry_usuario.config(state="normal")
         entry_contrasena.config(state="normal")
@@ -175,6 +175,7 @@ def cerrar_sesion():
 def eliminar_unidades_mapeadas():
     for unidad in unidades_mapeadas:
         subprocess.run(f'net use {unidad}: /delete', shell=True, capture_output=True)
+    unidades_mapeadas.clear()
 
 def ejecutar_programa():
     # Solicitar al usuario ingresar su nombre de usuario
@@ -214,7 +215,7 @@ def ejecutar_programa():
     else:
         messagebox.showwarning("Advertencia",
                                "No se encontraron unidades de red mapeadas para el usuario y contraseña proporcionados.")
-        cerrar_ventana()
+        # cerrar_ventana()
 
 #Creación interfaz de usuario
 # Crear ventana
