@@ -2,7 +2,7 @@ import string
 import subprocess
 from tkinter import messagebox
 import tkinter as tk
-import psutil
+# import psutil
 
 # Arreglo de unidades mapeadas
 unidades_mapeadas = []
@@ -42,6 +42,12 @@ usuario_jserfinanza = "jserfina"
 contra_jserfinanza = "jserfina"
 usuario_gerencia = "gerencia"
 contra_gerencia = "gerencia"
+usuario_jserfipopular = "jserpopu"
+contra_jserfipopular = "jserpopu"
+usuario_cserfipopular = "cserpopu"
+contra_cserfipopular = "cserpopu"
+usuario_ccoordinador = "ccoordin"
+contra_ccoordinador = "ccoordin"
 
 # Lista de rutas y sus correspondientes usuarios y contraseñas
 unidades_red = {
@@ -121,6 +127,32 @@ unidades_red = {
     "AAC:": {"ruta": ruta_comercial, "usuario": usuario_gerencia, "contrasena": contra_gerencia},
     "AAD:": {"ruta": ruta_juridico, "usuario": usuario_gerencia, "contrasena": contra_gerencia},
     "AAN:": {"ruta": ruta_manuales, "usuario": usuario_gerencia, "contrasena": contra_gerencia},
+    # Usuario Jurídico Serfinanza y Popular
+    "AAO:": {"ruta": ruta_scanner, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAP:": {"ruta": ruta_juridico, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAQ:": {"ruta": ruta_capacitaciones, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAR:": {"ruta": ruta_procesales, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAS:": {"ruta": ruta_popular, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAT:": {"ruta": ruta_serfinanza, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    "AAU:": {"ruta": ruta_manuales, "usuario": usuario_jserfipopular, "contrasena": contra_jserfipopular},
+    # Usuario Comercial Serfinanza y Popular
+    "AAV:": {"ruta": ruta_scanner, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAW:": {"ruta": ruta_comercial, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAX:": {"ruta": ruta_capacitaciones, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAY:": {"ruta": ruta_procesales, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAZ:": {"ruta": ruta_popular, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAAA:": {"ruta": ruta_serfinanza, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    "AAAB:": {"ruta": ruta_manuales, "usuario": usuario_cserfipopular, "contrasena": contra_cserfipopular},
+    # Usuario Coordinador Comercial
+    "AAAC:": {"ruta": ruta_scanner, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAD:": {"ruta": ruta_comercial, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAE:": {"ruta": ruta_capacitaciones, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAF:": {"ruta": ruta_procesales, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAG:": {"ruta": ruta_popular, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAH:": {"ruta": ruta_serfinanza, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAI:": {"ruta": ruta_bogota, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAJ:": {"ruta": ruta_colpatria, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    "AAAK:": {"ruta": ruta_manuales, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
 }
 
 
@@ -159,6 +191,7 @@ def cerrar_ventana():
         eliminar_unidades_mapeadas()
         ventana.destroy()
 
+
 def cerrar_sesion():
     if messagebox.askokcancel("Cerrar Sesión", "¿Estás seguro de que deseas cerrar la sesión?"):
         # cerrar_procesos()
@@ -176,6 +209,7 @@ def eliminar_unidades_mapeadas():
     for unidad in unidades_mapeadas:
         subprocess.run(f'net use {unidad}: /delete', shell=True, capture_output=True)
     unidades_mapeadas.clear()
+
 
 def ejecutar_programa():
     # Solicitar al usuario ingresar su nombre de usuario
@@ -214,11 +248,13 @@ def ejecutar_programa():
         messagebox.showinfo("Éxito", f"Unidades mapeadas correctamente: {unidades_mapeadas_str}")
     else:
         messagebox.showwarning("Advertencia",
-                               "No se encontraron unidades de red mapeadas para el usuario y contraseña proporcionados.")
+                               "No se encontraron unidades de red mapeadas para el usuario y contraseña proporcionados")
         # cerrar_ventana()
 
-#Creación interfaz de usuario
+# Creación interfaz de usuario
 # Crear ventana
+
+
 ventana = tk.Tk()
 ventana.title("Mapeo de Unidades de Red")
 
