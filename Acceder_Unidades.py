@@ -48,6 +48,8 @@ usuario_cserfipopular = "cserpopu"
 contra_cserfipopular = "cserpopu"
 usuario_ccoordinador = "ccoordin"
 contra_ccoordinador = "ccoordin"
+usuario_sergio = "jsergio"
+contra_sergio = "jsergio"
 
 # Lista de rutas y sus correspondientes usuarios y contraseñas
 unidades_red = {
@@ -153,6 +155,15 @@ unidades_red = {
     "AAAI:": {"ruta": ruta_bogota, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
     "AAAJ:": {"ruta": ruta_colpatria, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
     "AAAK:": {"ruta": ruta_manuales, "usuario": usuario_ccoordinador, "contrasena": contra_ccoordinador},
+    # Usuario Sergio
+    "AAAL:": {"ruta": ruta_scanner, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAM:": {"ruta": ruta_juridico, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAN:": {"ruta": ruta_capacitaciones, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAO:": {"ruta": ruta_procesales, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAP:": {"ruta": ruta_popular, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAQ:": {"ruta": ruta_serfinanza, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAR:": {"ruta": ruta_colpatria, "usuario": usuario_sergio, "contrasena": contra_sergio},
+    "AAAS:": {"ruta": ruta_manuales, "usuario": usuario_sergio, "contrasena": contra_sergio},
 }
 
 
@@ -177,7 +188,8 @@ def buscar_letra_disponible():
 #     for proc in psutil.process_iter():
 #         try:
 #             pinfo = proc.as_dict(attrs=['pid', 'name'])
-#             if any(programa.lower() in pinfo['name'].lower() for programa in ['winword', 'excel', 'powerpnt', 'acrobat', 'explorer']):
+#             if any(programa.lower()
+#             in pinfo['name'].lower() for programa in ['winword', 'excel', 'powerpnt', 'acrobat', 'explorer']):
 #                 proc.terminate()  # Terminar el proceso de manera amigable
 #                 print(f"Proceso {pinfo['name']} terminado.")
 #         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
@@ -258,7 +270,7 @@ def ejecutar_programa():
 ventana = tk.Tk()
 ventana.title("Mapeo de Unidades de Red")
 
-# Establecer el tamaño inicial de la ventana (ancho x alto)
+# Establecer el tamaño inicial de la ventana (ancho por alto)
 ventana.geometry("400x150")
 
 # Deshabilitar el redimensionamiento horizontal y vertical
